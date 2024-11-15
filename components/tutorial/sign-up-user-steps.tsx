@@ -25,7 +25,7 @@ export default function SignUpUserSteps() {
             <Link
               className="text-primary hover:text-foreground"
               href={
-                "https://supabase.com/dashboard/project/_/auth/url-configuration"
+                "https://supabase.com/protected/project/_/auth/url-configuration"
               }
             >
               update your Supabase project

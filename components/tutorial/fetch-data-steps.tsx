@@ -51,7 +51,7 @@ export default function FetchDataSteps() {
         <p>
           Head over to the{" "}
           <a
-            href="https://supabase.com/dashboard/project/_/editor"
+            href="https://supabase.com/protected/project/_/editor"
             className="font-bold hover:underline text-foreground/80"
             target="_blank"
             rel="noreferrer"
@@ -62,7 +62,7 @@ export default function FetchDataSteps() {
           data. If you're stuck for creativity, you can copy and paste the
           following into the{" "}
           <a
-            href="https://supabase.com/dashboard/project/_/sql/new"
+            href="https://supabase.com/protected/project/_/sql/new"
             className="font-bold hover:underline text-foreground/80"
             target="_blank"
             rel="noreferrer"

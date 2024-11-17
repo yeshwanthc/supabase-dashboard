@@ -72,7 +72,7 @@ export default function CreateUser() {
           onChange={(e) => setAge(e.target.value)}
           required
         />
-        <button type="submit">Add Note</button>
+        <button type="submit">Add User</button>
       </form>
 
       {message && <p>{message}</p>}

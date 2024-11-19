@@ -10,25 +10,32 @@ import { Pencil, Trash2, Check, X } from 'lucide-react'
 interface UserRowProps {
   user: User
   index: number
-  updateUser: (id: string, updatedUser: Partial<User>) => Promise<void>
+  updateUser: (id: string, updatedUser: Partial<User>) => Promise<boolean>
   deleteUser: (id: string) => Promise<void>
 }
 
 export default function UserRow({ user, index, updateUser, deleteUser }: UserRowProps) {
   const [isEditing, setIsEditing] = useState(false)
   const [editedUser, setEditedUser] = useState(user)
+  const [isLoading, setIsLoading] = useState(false)
 
   const handleEdit = () => {
     setIsEditing(true)
   }
 
   const handleSave = async () => {
+    setIsLoading(true)
     try {
-      await updateUser(user.id, editedUser)
-      setIsEditing(false)
+      // Remove the 'id' field from the editedUser object
+      const { id, ...userDataToUpdate } = editedUser;
+      const success = await updateUser(user.id, userDataToUpdate)
+      if (success) {
+        setIsEditing(false)
+      }
     } catch (error) {
       console.error("Failed to save user:", error)
-      // Optionally, you can add error handling here, such as displaying an error message to the user
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -78,6 +85,7 @@ export default function UserRow({ user, index, updateUser, deleteUser }: UserRow
               variant="ghost"
               size="icon"
               onClick={handleSave}
+              disabled={isLoading}
               aria-label="Save"
               className="text-green-600 hover:text-green-800"
             >
@@ -87,6 +95,7 @@ export default function UserRow({ user, index, updateUser, deleteUser }: UserRow
               variant="ghost"
               size="icon"
               onClick={handleCancel}
+              disabled={isLoading}
               aria-label="Cancel"
               className="text-red-600 hover:text-red-800"
             >

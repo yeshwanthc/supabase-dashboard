@@ -137,7 +137,7 @@ export default function CreateUser() {
                 </FormItem>
               )}
             />
-            <Button type="submit" className="w-full" disabled={isLoading}>
+            <Button type="submit" className="w-full bg-[#0ea5e9]" disabled={isLoading}>
               {isLoading ? "Creating..." : "Create User"}
             </Button>
           </form>

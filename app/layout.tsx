@@ -68,7 +68,7 @@ export default function RootLayout({
                 </div>
               </nav>
             </header>
-            <main className="flex-1 container py-6">
+            <main className="flex container py-28">
               <div className="flex flex-col gap-8 max-w-5xl mx-auto">
                 {children}
               </div>

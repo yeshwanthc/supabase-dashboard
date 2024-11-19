@@ -31,7 +31,6 @@ export default function UsersDashboard() {
   const [filter, setFilter] = useState("")
   const [searchInput, setSearchInput] = useState("")
   const [sortBy, setSortBy] = useState("name")
-  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc')
   const [currentPage, setCurrentPage] = useState(1)
   const [totalPages, setTotalPages] = useState(1)
   const { toast } = useToast()
@@ -44,7 +43,7 @@ export default function UsersDashboard() {
       let query = supabase
         .from("contact_info")
         .select("*", { count: 'exact' })
-        .order('name', { ascending: true })
+        .order(sortBy, { ascending: true })
         .range((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage - 1)
 
       if (filter) {
@@ -67,7 +66,7 @@ export default function UsersDashboard() {
     } finally {
       setLoading(false)
     }
-  }, [filter, currentPage, toast])
+  }, [filter, sortBy, currentPage, toast])
 
   useEffect(() => {
     fetchUsers()
@@ -77,7 +76,7 @@ export default function UsersDashboard() {
     debounce((value: string) => {
       setFilter(value)
       setCurrentPage(1)
-    }, 500),
+    }, 800),
     []
   )
 
@@ -87,26 +86,22 @@ export default function UsersDashboard() {
     debouncedSearch(value)
   }
 
-  const sortedUsers = [...users].sort((a, b) => {
-    if (a[sortBy as keyof User] < b[sortBy as keyof User]) return sortOrder === 'asc' ? -1 : 1
-    if (a[sortBy as keyof User] > b[sortBy as keyof User]) return sortOrder === 'asc' ? 1 : -1
-    return 0
-  })
-
   async function updateUser(id: string, updatedUser: Partial<User>) {
     try {
+      const { id: _, ...userDataToUpdate } = updatedUser;
       const { error } = await supabase
         .from("contact_info")
-        .update(updatedUser)
+        .update(userDataToUpdate)
         .eq("id", id)
 
       if (error) throw error
 
-      setUsers(users.map((user) => (user.id === id ? { ...user, ...updatedUser } : user)))
+      setUsers(users.map((user) => (user.id === id ? { ...user, ...userDataToUpdate } : user)))
       toast({
         title: "Success",
         description: "User updated successfully.",
       })
+      return true
     } catch (error) {
       console.error("Error updating user:", error)
       toast({
@@ -114,6 +109,7 @@ export default function UsersDashboard() {
         description: "Failed to update user. Please try again.",
         variant: "destructive",
       })
+      return false
     }
   }
 
@@ -142,7 +138,6 @@ export default function UsersDashboard() {
     setSearchInput("")
     setFilter("")
     setSortBy("name")
-    setSortOrder('asc')
     setCurrentPage(1)
   }
 
@@ -155,7 +150,7 @@ export default function UsersDashboard() {
   }
 
   return (
-    <div className="container mx-auto py-10 bg-blue-50">
+    <div className="container lg:w-[900px] mx-auto py-10 bg-blue-50">
       <h1 className="text-2xl font-bold mb-5 text-blue-800">Users Dashboard</h1>
       <div className="mb-4 flex gap-4 items-center">
         <div className="relative flex-grow max-w-sm">
@@ -183,7 +178,6 @@ export default function UsersDashboard() {
           value={sortBy}
           onValueChange={(value) => {
             setSortBy(value)
-            setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')
           }}
         >
           <SelectTrigger className="max-w-[200px]">
@@ -200,7 +194,7 @@ export default function UsersDashboard() {
         </Button>
       </div>
       <UserTable
-        users={sortedUsers}
+        users={users}
         updateUser={updateUser}
         deleteUser={deleteUser}
       />

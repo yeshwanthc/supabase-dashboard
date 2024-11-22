@@ -26,7 +26,6 @@ export default function UserRow({ user, index, updateUser, deleteUser }: UserRow
   const handleSave = async () => {
     setIsLoading(true)
     try {
-      // Remove the 'id' field from the editedUser object
       const { id, ...userDataToUpdate } = editedUser;
       const success = await updateUser(user.id, userDataToUpdate)
       if (success) {
@@ -45,7 +44,7 @@ export default function UserRow({ user, index, updateUser, deleteUser }: UserRow
   }
 
   return (
-    <TableRow className="hover:bg-blue-50">
+    <TableRow>
       <TableCell>{index + 1}</TableCell>
       <TableCell>
         {isEditing ? (

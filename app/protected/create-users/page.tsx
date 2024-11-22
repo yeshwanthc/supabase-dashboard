@@ -46,7 +46,7 @@ export default function CreateMultipleUsers() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      users: [{ name: "", phone: "", email: "", age: "" }],
+      users: [{ name: "", phone: "", email: "", age: 0 }],
     },
   })
 
@@ -70,7 +70,7 @@ export default function CreateMultipleUsers() {
         title: "Users created",
         description: `Successfully added ${values.users.length} new user(s).`,
       })
-      form.reset({ users: [{ name: "", phone: "", email: "", age: "" }] })
+      form.reset({ users: [{ name: "", phone: "", email: "", age: 0 }] })
     } catch (error) {
       toast({
         title: "Error",
@@ -173,7 +173,7 @@ export default function CreateMultipleUsers() {
               variant="outline"
               size="sm"
               className="mt-2"
-              onClick={() => append({ name: "", phone: "", email: "", age: "" })}
+              onClick={() => append({ name: "", phone: "", email: "", age: 0 })}
             >
               <PlusCircle className="mr-2 h-4 w-4" />
               Add Another User

@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 
-export default function Home() {
+export default function Upload() {
   const [file, setFile] = useState<File | null>(null);
   const [url, setUrl] = useState<string | null>(null);
   const [isUploading, setIsUploading] = useState(false);
@@ -39,7 +39,10 @@ export default function Home() {
       const uploadRes = await fetch(uploadURL, {
         method: "PUT",
         body: file,
-        headers: { "Content-Type": fileType },
+        headers: { 
+          "Content-Type": fileType,
+          "Origin": window.location.origin,
+        },
       });
 
       if (!uploadRes.ok) {

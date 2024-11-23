@@ -58,7 +58,7 @@ export default function Upload() {
   };
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto py-24">
       <h1 className="text-2xl font-bold mb-4">Upload to S3</h1>
       <div className="space-y-4">
         <Input 
@@ -68,7 +68,7 @@ export default function Upload() {
             if (files) setFile(files[0]);
           }} 
         />
-        <Button onClick={handleFileUpload} disabled={isUploading}>
+        <Button onClick={handleFileUpload} className="bg-blue-500 hover:bg-blue-600 focus:ring-2 focus:ring-blue-300" disabled={isUploading}>
           {isUploading ? 'Uploading...' : 'Upload'}
         </Button>
         {error && (

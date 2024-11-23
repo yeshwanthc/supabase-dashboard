@@ -84,7 +84,7 @@ export default function CreateMultipleUsers() {
 
   return (
     <div className="w-full bg-gray-100 py-8 px-4">
-      <div className="max-w-6xl mx-auto">
+      <div className="container mx-auto py-10">
         <h2 className="text-3xl font-bold text-gray-800 mb-2">Create Multiple Users</h2>
         <p className="text-gray-600 mb-6">Add multiple users to the system at once.</p>
 
@@ -181,7 +181,11 @@ export default function CreateMultipleUsers() {
 
             <Button
               type="submit"
-              className="w-full"
+              className={`w-full py-3 rounded-lg font-semibold text-white transition ${
+                isLoading
+                  ? "bg-blue-400 cursor-not-allowed"
+                  : "bg-blue-500 hover:bg-blue-600 focus:ring-2 focus:ring-blue-300"
+              }`}
               disabled={isLoading}
             >
               {isLoading ? "Creating..." : "Create Users"}

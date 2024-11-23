@@ -75,7 +75,7 @@ export default function CreateUser() {
 
   return (
     <div className="w-full bg-gray-100 py-8 px-4">
-    <div className="max-w-6xl mx-auto">
+    <div className="container mx-auto py-10">
       <h2 className="text-3xl font-bold text-gray-800 mb-2">Create User</h2>
       <p className="text-gray-600 mb-6">Add a new user to the system.</p>
   

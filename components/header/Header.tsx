@@ -11,6 +11,7 @@ import {
   Twitter,
   Linkedin,
   User2,
+  File,
 } from "lucide-react";
 
 const Header = () => {
@@ -45,6 +46,13 @@ const Header = () => {
               >
                 <Users className="mr-2 h-4 w-4" />
                 Users
+              </Link>
+              <Link
+                href="/protected/upload"
+                className="flex items-center text-foreground/60 transition-colors hover:text-foreground/80"
+              >
+                <File className="mr-2 h-4 w-4" />
+                Upload
               </Link>
             </div>
           </div>

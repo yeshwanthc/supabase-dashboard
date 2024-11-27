@@ -7,9 +7,6 @@ import {
   Home,
   Users,
   UserPlus,
-  Github,
-  Twitter,
-  Linkedin,
   User2,
   File,
 } from "lucide-react";

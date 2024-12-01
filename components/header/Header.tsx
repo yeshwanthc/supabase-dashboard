@@ -44,13 +44,6 @@ const Header = () => {
                 <Users className="mr-2 h-4 w-4" />
                 Users
               </Link>
-              <Link
-                href="/protected/upload"
-                className="flex items-center text-foreground/60 transition-colors hover:text-foreground/80"
-              >
-                <File className="mr-2 h-4 w-4" />
-                Upload
-              </Link>
             </div>
           </div>
           <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">

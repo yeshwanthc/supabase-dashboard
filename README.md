@@ -22,7 +22,7 @@ To install and set up the application, follow these steps:
    npm install
    ```
 
-3. Set up the environment variables (if applicable).
+3. Set up the environment variables in .env.local.
 
 ## Usage
-To run the application, use the following command:
+To run the application, use the following command: npm run dev
